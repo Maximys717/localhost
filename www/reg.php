@@ -1,8 +1,8 @@
 <html>
-    <head>
-    <title>Registration</title>
-    </head>
-    <body>
+   <head>
+      <title>Registration</title>
+   </head>
+   <body>
     <h2>Registration</h2>
     <form action="save_user.php" method="post" enctype="multipart/form-data">
     <!--**** save_user.php - это адрес обработчика.  То есть, после нажатия на кнопку "Зарегистрироваться", данные из полей  отправятся на страничку save_user.php методом "post" ***** -->
@@ -32,5 +32,5 @@
 
 
 </p></form>
-    </body>
+   </body>
     </html>
