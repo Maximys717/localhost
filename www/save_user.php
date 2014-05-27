@@ -59,7 +59,7 @@ if (!isset($fupload) or empty($fupload) or $fupload =='')
     $avatar = "avatars/net-avatara.jpg"; //можете нарисовать net-avatara.jpg или взять в исходниках
 }
 
-$password = md5($password); //шифруем пароль
+//$password = md5($password); //шифруем пароль
 $password = strrev($password); //для надежности добавим реверс
 
 // подключаемся к базе
