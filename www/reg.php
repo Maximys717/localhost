@@ -1,36 +1,34 @@
 <html>
-   <head>
-      <title>Registration</title>
-   </head>
-   <body>
-    <h2>Registration</h2>
-    <form action="save_user.php" method="post" enctype="multipart/form-data">
-    <!--**** save_user.php - ÑÑ‚Ð¾ Ð°Ð´Ñ€ÐµÑ Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸ÐºÐ°.  Ð¢Ð¾ ÐµÑÑ‚ÑŒ, Ð¿Ð¾ÑÐ»Ðµ Ð½Ð°Ð¶Ð°Ñ‚Ð¸Ñ Ð½Ð° ÐºÐ½Ð¾Ð¿ÐºÑƒ "Ð—Ð°Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒÑÑ", Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð· Ð¿Ð¾Ð»ÐµÐ¹  Ð¾Ñ‚Ð¿Ñ€Ð°Ð²ÑÑ‚ÑÑ Ð½Ð° ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ‡ÐºÑƒ save_user.php Ð¼ÐµÑ‚Ð¾Ð´Ð¾Ð¼ "post" ***** -->
-<p>
-    <label>Your login:<br></label>
-    <input name="login" type="text" size="15" maxlength="15">
-    </p>
-<!--**** Ð’ Ñ‚ÐµÐºÑÑ‚Ð¾Ð²Ð¾Ðµ Ð¿Ð¾Ð»Ðµ (name="login" type="text") Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ Ð²Ð²Ð¾Ð´Ð¸Ñ‚ ÑÐ²Ð¾Ð¹ Ð»Ð¾Ð³Ð¸Ð½ ***** -->
-<p>
-    <label>Your password:<br></label>
-    <input name="password" type="password" size="15" maxlength="15">
-    </p>
-<!--**** Ð’ Ð¿Ð¾Ð»Ðµ Ð´Ð»Ñ Ð¿Ð°Ñ€Ð¾Ð»ÐµÐ¹ (name="password" type="password") Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ Ð²Ð²Ð¾Ð´Ð¸Ñ‚ ÑÐ²Ð¾Ð¹ Ð¿Ð°Ñ€Ð¾Ð»ÑŒ ***** -->
-
- <p>
-
-        <label>Choose the avatar. Photo must be in JPG, JPEG, GIF or PNG format:<br></label>
-        <input type="FILE" name="fupload">
- </p>
-
-        <!-- Ð’ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½ÑƒÑŽ fupload Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð¸Ñ‚ÑÑ Ð¸Ð·Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ðµ, ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ðµ Ð²Ñ‹Ð±Ñ€Ð°Ð» Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ -->
+	<head>
+		<title>Registration</title>
+	</head>
+	<body>
+		<h2>Registration</h2>
+	<form action='save_user.php' method='post' enctype='multipart/form-data'>
+<!--**** save_user.php - ýòî àäðåñ îáðàáîò÷èêà. Òî åñòü, ïîñëå íàæàòèÿ íà êíîïêó "Çàðåãèñòðèðîâàòüñÿ", äàííûå èç ïîëåé 
+	îòïðàâÿòñÿ íà ñòðàíè÷êó save_user.php ìåòîäîì "post" ***** -->
 
 <p>
-    <input type="submit" name="submit" value="Register">
-<!--**** ÐšÐ½Ð¾Ð¿Ð¾Ñ‡ÐºÐ° (type="submit") Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð»ÑÐµÑ‚ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð½Ð° ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ‡ÐºÑƒ save_user.php ***** -->
+	<label>Your login:<br></label>
+	<input name="login" type="text" size="15" maxlength="15">
+</p>
+<!--**** Â òåêñòîâîå ïîëå (name="login" type="text") ïîëüçîâàòåëü ââîäèò ñâîé ëîãèí ***** -->
 
+<p>
+	<label>Your password:<br></label>
+	<input name="password" type="password" size="15" maxlength="15">
+</p>
+<!--**** Â ïîëå äëÿ ïàðîëåé (name="password" type="password") ïîëüçîâàòåëü ââîäèò ñâîé ïàðîëü ***** -->
 
+<p>
+	<label>Choose the avatar. Photo must be in JPG, JPEG, GIF or PNG format:<br></label>
+	<input type="FILE" name="fupload">
+</p>
+<!-- Â ïåðåìåííóþ fupload îòïðàâèòñÿ èçîáðàæåíèå, êîòîðîå âûáðàë ïîëüçîâàòåëü -->
 
+<p>
+	<input type='submit' name='submit' value='Register'>
+<!--**** Êíîïî÷êà (type="submit") îòïðàâëÿåò äàííûå íà ñòðàíè÷êó save_user.php ***** -->
 </p></form>
-   </body>
-    </html>
+	</body>
+</html>
