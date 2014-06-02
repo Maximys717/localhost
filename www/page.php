@@ -176,14 +176,17 @@ HERE;
 
 
 	// в данной строке выборка сообщений идёт сразу из двух граф - читаемые и владелец страницы
-	//$tmp = mysql_query("SELECT readers.the_followed_id,users.id,users.login,messages.* FROM readers,users,messages WHERE readers.subscriber_id='$followed_id' AND users.id=readers.the_followed_id AND (messages.author=users.login OR messages.author='$owner_login') ORDER BY messages.id DESC",$db);
+	// DISTINCT в купе с GROUP BY позволяют удалить дубликаты сообщений, которые получаются при выборке (если 2 и больше читаемых, то сообщения хозяина странички равны количеству читаемых им, см. код)
+	$tmp = mysql_query("SELECT DISTINCT readers.the_followed_id,users.id,users.login,messages.* FROM readers,users,messages WHERE readers.subscriber_id='$followed_id' AND users.id=readers.the_followed_id AND (messages.author=users.login OR messages.author='$owner_login') GROUP BY messages.id ORDER BY messages.id DESC",$db);
 	
 	// в данной строке выборка сообщений идёт только читаемых
-	$tmp = mysql_query("SELECT readers.the_followed_id,users.id,users.login,messages.* FROM readers,users,messages WHERE readers.subscriber_id='$followed_id' AND users.id=readers.the_followed_id AND messages.author=users.login ORDER BY messages.id DESC",$db);
-	
+	//$tmp = mysql_query("SELECT readers.the_followed_id,users.id,users.login,messages.* FROM readers,users,messages WHERE readers.subscriber_id='$followed_id' AND users.id=readers.the_followed_id AND messages.author=users.login ORDER BY messages.id DESC",$db);
+		
 	// в данной строке выборка сообщений идёт только владельца страницы
-	//$tmp = mysql_query("SELECT * FROM messages WHERE author='$login' ORDER BY id DESC",$db); 
+	//$tmp = mysql_query("(SELECT * FROM messages WHERE author='$login') UNION (SELECT * FROM messages WHERE author='$login') ORDER BY id DESC",$db); 
+	
 	$messages = mysql_fetch_array($tmp); // извлекаем сообщения пользователя, сортируем по идентификатору в обратном порядке, т.е. самые новые сообщения будут вверху
+
 	
 	if (!empty($messages['id'])) {
     
@@ -239,8 +242,12 @@ HERE;
 				}
 					//выводим само сообщение 
 		}
-	
+
 			while($messages = mysql_fetch_array($tmp));
+			
+	
+			
+			
 	}
     else {
 //если сообщений не найдено
@@ -290,8 +297,8 @@ print <<<HERE
 	<h2>Сообщения пользователя "$owner_login"</h2>
 HERE;
 
-$tmp = mysql_query("SELECT readers.the_followed_id,users.id,users.login,messages.* FROM readers,users,messages WHERE readers.subscriber_id='$followed_id' AND users.id=readers.the_followed_id AND (messages.author=users.login OR messages.author='$owner_login') ORDER BY messages.id DESC",$db);
-
+// DISTINCT в купе с GROUP BY позволяют удалить дубликаты сообщений, которые получаются при выборке (если 2 и больше читаемых, то сообщения хозяина странички равны количеству читаемых им, см. код)
+$tmp = mysql_query("SELECT DISTINCT readers.the_followed_id,users.id,users.login,messages.* FROM readers,users,messages WHERE readers.subscriber_id='$followed_id' AND users.id=readers.the_followed_id AND (messages.author=users.login OR messages.author='$owner_login') GROUP BY messages.id ORDER BY messages.id DESC",$db);
 
 	//$tmp = mysql_query("SELECT * FROM messages WHERE author='$owner_login' ORDER BY id DESC",$db); 
 	$messages = mysql_fetch_array($tmp); // извлекаем сообщения пользователя, сортируем по идентификатору в обратном порядке, т.е. самые новые сообщения будут вверху

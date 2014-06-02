@@ -69,7 +69,7 @@ HERE;
 
 <?php
 
-$result7 = mysql_query("SELECT readers.subscriber_id,users.id,users.login FROM readers,users WHERE readers.the_followed_id='$got_id' AND users.id=readers.subscriber_id",$db); // извлекаем логин и идентификатор пользователей 
+$result7 = mysql_query("SELECT readers.subscriber_id,users.id,users.login FROM readers,users WHERE readers.the_followed_id='$got_id' AND users.id=readers.subscriber_id ORDER BY login",$db); // извлекаем логин и идентификатор пользователей 
 $myrow7 = mysql_fetch_array($result7);
 	
 	do {

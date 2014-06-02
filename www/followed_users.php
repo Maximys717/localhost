@@ -71,7 +71,7 @@ HERE;
 
 <?php
 
-$result7 = mysql_query("SELECT readers.the_followed_id,users.id,users.login FROM readers,users WHERE readers.subscriber_id='$got_id' AND users.id=readers.the_followed_id",$db); // извлекаем логин и идентификатор пользователей 
+$result7 = mysql_query("SELECT readers.the_followed_id,users.id,users.login FROM readers,users WHERE readers.subscriber_id='$got_id' AND users.id=readers.the_followed_id ORDER BY login",$db); // извлекаем логин и идентификатор пользователей 
 $myrow7 = mysql_fetch_array($result7);
 	
 	do {
