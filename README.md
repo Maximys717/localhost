@@ -5,7 +5,7 @@ first site - а-ля twitter.com :)
 Веб-сервер:
 
     Apache/2.2.22 (Win32) mod_ssl/2.2.22 OpenSSL/1.0.1c PHP/5.3.13
-    Версия клиента базы данных: libmysql - mysqlnd 5.0.8-dev - 20102224 - $Id: 65fe78e70ce53d27a6cd578597722950e490b0d0 $
+    Версия клиента базы данных: libmysql - mysqlnd 5.0.8-dev - 20102224
     PHP расширение: mysqli Документация
 
 
