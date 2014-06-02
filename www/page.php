@@ -186,7 +186,6 @@ HERE;
 	//$tmp = mysql_query("(SELECT * FROM messages WHERE author='$login') UNION (SELECT * FROM messages WHERE author='$login') ORDER BY id DESC",$db); 
 	
 	$messages = mysql_fetch_array($tmp); // извлекаем сообщения пользователя, сортируем по идентификатору в обратном порядке, т.е. самые новые сообщения будут вверху
-
 	
 	if (!empty($messages['id'])) {
     
