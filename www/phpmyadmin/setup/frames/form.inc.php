@@ -3,7 +3,7 @@
 /**
  * Form edit view
  *
- * @package PhpMyAdmin-Setup
+ * @package PhpMyAdmin-setup
  */
 
 if (!defined('PHPMYADMIN')) {
@@ -22,15 +22,15 @@ require './libraries/config/setup.forms.php';
 $formset_id = filter_input(INPUT_GET, 'formset');
 $mode = filter_input(INPUT_GET, 'mode');
 if (! isset($forms[$formset_id])) {
-    PMA_fatalError(__('Incorrect formset, check $formsets array in setup/frames/form.inc.php!'));
+    die(__('Incorrect formset, check $formsets array in setup/frames/form.inc.php'));
 }
 
 if (isset($GLOBALS['strConfigFormset_' . $formset_id])) {
     echo '<h2>' . $GLOBALS['strConfigFormset_' . $formset_id] . '</h2>';
 }
-$form_display = new FormDisplay($GLOBALS['ConfigFile']);
+$form_display = new FormDisplay();
 foreach ($forms[$formset_id] as $form_name => $form) {
     $form_display->registerForm($form_name, $form);
 }
-PMA_Process_formset($form_display);
+process_formset($form_display);
 ?>

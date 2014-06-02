@@ -5,17 +5,12 @@
  *
  * @package PhpMyAdmin
  */
-if (! defined('PHPMYADMIN')) {
-    exit;
-}
 
 /**
- * Generic list class
- *
  * @todo add caching
+ * @since phpMyAdmin 2.9.10
  * @abstract
  * @package PhpMyAdmin
- * @since   phpMyAdmin 2.9.10
  */
 abstract class PMA_List extends ArrayObject
 {
@@ -24,27 +19,29 @@ abstract class PMA_List extends ArrayObject
      */
     protected $item_empty = '';
 
-    /**
-     * PMA_List constructor
-     *
-     * @param array  $array          The input parameter accepts an array or an
-     *                               Object.
-     * @param int    $flags          Flags to control the behaviour of the
-     *                               ArrayObject object.
-     * @param string $iterator_class Specify the class that will be used for
-     *                               iteration of the ArrayObject object.
-     *                               ArrayIterator is the default class used.
-     */
-    public function __construct(
-        $array = array(), $flags = 0, $iterator_class = "ArrayIterator"
-    ) {
+    public function __construct($array = array(), $flags = 0, $iterator_class = "ArrayIterator")
+    {
         parent::__construct($array, $flags, $iterator_class);
+    }
+
+    /**
+     * returns item only if there is only one in the list
+     *
+     * @return  single item
+     */
+    public function getSingleItem()
+    {
+        if (count($this) === 1) {
+            return reset($this);
+        }
+
+        return $this->getEmpty();
     }
 
     /**
      * defines what is an empty item (0, '', false or null)
      *
-     * @return mixed   an empty item
+     * @return  mixed   an empty item
      */
     public function getEmpty()
     {
@@ -55,7 +52,8 @@ abstract class PMA_List extends ArrayObject
      * checks if the given db names exists in the current list, if there is
      * missing at least one item it returns false otherwise true
      *
-     * @return boolean true if all items exists, otheriwse false
+     * @param string  $db_name,..     one or more mysql result resources
+     * @return  boolean true if all items exists, otheriwse false
      */
     public function exists()
     {
@@ -72,15 +70,12 @@ abstract class PMA_List extends ArrayObject
     /**
      * returns HTML <option>-tags to be used inside <select></select>
      *
-     * @param mixed   $selected                   the selected db or true for
-     *                                            selecting current db
-     * @param boolean $include_information_schema whether include information schema
-     *
-     * @return string  HTML option tags
+     * @param mixed   $selected   the selected db or true for selecting current db
+     * @param boolean $include_information_schema
+     * @return  string  HTML option tags
      */
-    public function getHtmlOptions(
-        $selected = '', $include_information_schema = true
-    ) {
+    public function getHtmlOptions($selected = '', $include_information_schema = true)
+    {
         if (true === $selected) {
             $selected = $this->getDefault();
         }
@@ -88,8 +83,7 @@ abstract class PMA_List extends ArrayObject
         $options = '';
         foreach ($this as $each_item) {
             if (false === $include_information_schema
-                && $GLOBALS['dbi']->isSystemSchema($each_item)
-            ) {
+                    && PMA_is_system_schema($each_item)) {
                 continue;
             }
             $options .= '<option value="' . htmlspecialchars($each_item) . '"';
@@ -105,7 +99,7 @@ abstract class PMA_List extends ArrayObject
     /**
      * returns default item
      *
-     * @return string  default item
+     * @return  string  default item
      */
     public function getDefault()
     {
@@ -115,7 +109,6 @@ abstract class PMA_List extends ArrayObject
     /**
      * builds up the list
      *
-     * @return void
      */
     abstract public function build();
 }

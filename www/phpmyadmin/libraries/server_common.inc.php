@@ -1,13 +1,16 @@
 <?php
 /* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
- * Shared code for server pages
- *
  * @package PhpMyAdmin
  */
 if (! defined('PHPMYADMIN')) {
     exit;
 }
+
+/**
+ * Gets some core libraries
+ */
+require_once './libraries/common.inc.php';
 
 /**
  * Handles some variables that may have been sent by the calling script
@@ -22,30 +25,32 @@ if (empty($viewing_mode)) {
 /**
  * Set parameters for links
  */
-$url_query = PMA_URL_getCommon($db);
+$url_query = PMA_generate_common_url($db);
 
 /**
  * Defines the urls to return to in case of error in a sql statement
  */
-$err_url = 'index.php' . $url_query;
+$err_url = 'main.php' . $url_query;
+
+/**
+ * Displays the headers
+ */
+require_once './libraries/header.inc.php';
 
 /**
  * @global boolean Checks for superuser privileges
  */
-$is_superuser = $GLOBALS['dbi']->isSuperuser();
+$is_superuser = PMA_isSuperuser();
 
 // now, select the mysql db
-if ($is_superuser && ! PMA_DRIZZLE) {
-    $GLOBALS['dbi']->selectDb('mysql', $userlink);
+if ($is_superuser && !PMA_DRIZZLE) {
+    PMA_DBI_select_db('mysql', $userlink);
 }
 
-PMA_Util::checkParameters(
-    array('is_superuser', 'url_query'), false
-);
-
 /**
- * shared functions for server page
+ * @global array binary log files
  */
-require_once './libraries/server_common.lib.php';
-
+$binary_logs = PMA_DRIZZLE
+    ? null
+    : PMA_DBI_fetch_result('SHOW MASTER LOGS', 'Log_name', null, null, PMA_DBI_QUERY_STORE);
 ?>

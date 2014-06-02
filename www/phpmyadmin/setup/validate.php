@@ -3,7 +3,7 @@
 /**
  * Validation callback.
  *
- * @package PhpMyAdmin-Setup
+ * @package PhpMyAdmin-setup
  */
 
 /**
@@ -12,17 +12,17 @@
 require './lib/common.inc.php';
 
 $validators = array();
-require './libraries/config/Validator.class.php';
+require './libraries/config/validate.lib.php';
 
 header('Content-type: application/json');
 
 $vids = explode(',', filter_input(INPUT_POST, 'id'));
 $values = json_decode(filter_input(INPUT_POST, 'values'));
 if (!($values instanceof stdClass)) {
-    PMA_fatalError(__('Wrong data'));
+    die(__('Wrong data'));
 }
 $values = (array)$values;
-$result = PMA_Validator::validate($GLOBALS['ConfigFile'], $vids, $values, true);
+$result = PMA_config_validate($vids, $values, true);
 if ($result === false) {
     $result = 'Wrong data or no validation for ' . $vids;
 }

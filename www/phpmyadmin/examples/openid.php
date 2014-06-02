@@ -12,7 +12,7 @@
  * User first authenticates using OpenID and based on content of $AUTH_MAP
  * the login information is passed to phpMyAdmin in session data.
  *
- * @package    PhpMyAdmin
+ * @package PhpMyAdmin
  * @subpackage Example
  */
 
@@ -32,35 +32,31 @@ $AUTH_MAP = array(
 
 /**
  * Simple function to show HTML page with given content.
- *
- * @param string $contents Content to include in page
- *
- * @return void
  */
-function Show_page($contents)
+function show_page($contents)
 {
     header('Content-Type: text/html; charset=utf-8');
     echo '<?xml version="1.0" encoding="utf-8"?>' . "\n";
     ?>
-    <!DOCTYPE HTML>
-    <html lang="en" dir="ltr">
-    <head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
     <link rel="icon" href="../favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
-    <meta charset="utf-8" />
     <title>phpMyAdmin OpenID signon example</title>
-    </head>
-    <body>
-    <?php
-    if (isset($_SESSION) && isset($_SESSION['PMA_single_signon_error_message'])) {
-        echo '<p class="error">' . $_SESSION['PMA_single_signon_message'] . '</p>';
-        unset($_SESSION['PMA_single_signon_message']);
-    }
-    echo $contents;
-    ?>
-    </body>
-    </html>
-    <?php
+</head>
+<body>
+<?php
+if (isset($_SESSION) && isset($_SESSION['PMA_single_signon_error_message'])) {
+    echo '<p class="error">' . $_SESSION['PMA_single_signon_message'] . '</p>';
+    unset($_SESSION['PMA_single_signon_message']);
+}
+echo $contents;
+?>
+</body>
+</html>
+<?php
 }
 
 /* Need to have cookie visible from parent directory */
@@ -93,7 +89,7 @@ OpenID: <input type="text" name="identifier" /><br />
 </form>
 </body>
 </html>';
-    Show_page($content);
+    show_page($content);
     exit;
 }
 
@@ -113,7 +109,7 @@ try {
     $contents = "<div class='relyingparty_results'>\n";
     $contents .= "<pre>" . $e->getMessage() . "</pre>\n";
     $contents .= "</div class='relyingparty_results'>";
-    Show_page($contents);
+    show_page($contents);
     exit;
 }
 
@@ -125,7 +121,7 @@ if (isset($_POST['start'])) {
         $contents = "<div class='relyingparty_results'>\n";
         $contents .= "<pre>" . $e->getMessage() . "</pre>\n";
         $contents .= "</div class='relyingparty_results'>";
-        Show_page($contents);
+        show_page($contents);
         exit;
     }
 
@@ -154,7 +150,7 @@ if (isset($_POST['start'])) {
         /* Redirect to phpMyAdmin (should use absolute URL here!) */
         header('Location: ../index.php');
     } else {
-        Show_page('<p>User not allowed!</p>');
+        show_page('<p>User not allowed!</p>');
         exit;
     }
 }
